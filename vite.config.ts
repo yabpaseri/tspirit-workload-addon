@@ -7,7 +7,7 @@ import archive from './plugins/vite-plugin-archive';
 const version = version_name.replace(/[^\d.-]+/g, '').replace('-', '.');
 const manifest = defineManifest(({ mode }) => ({
 	manifest_version: 3,
-	name: 'Web Extension Base',
+	name: 'TSpirit workload addon',
 	author,
 	description,
 	version,
