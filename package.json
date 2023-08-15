@@ -2,7 +2,7 @@
   "private": true,
   "name": "tspirit-workload-addon",
   "version": "0.1.0",
-  "description": "description...",
+  "description": "SalesforceにインストールされたTeamSpiritが提供するページを拡張します。",
   "license": "MIT",
   "author": "yabpaseri",
   "type": "module",
