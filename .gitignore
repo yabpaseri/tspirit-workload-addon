@@ -129,8 +129,6 @@ dist-ssr
 .pnp.*
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
 .vscode-test
 .idea
 .DS_Store

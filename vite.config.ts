@@ -18,7 +18,22 @@ const manifest = defineManifest(({ mode }) => ({
 		'48': 'icons/icon48.png',
 		'128': 'icons/icon128.png',
 	},
-	action: { default_popup: 'index.html' },
+	content_scripts: [
+		{
+			// 勤務表と工数実績のページに対して、拡張機能によるDOM操作を実行する
+			// all_frames:true によって、iframeの中でも拡張機能が実行されるようにしている（iframeの内外でそれぞれ拡張機能が実行される形）
+			// その上で、matchesで特定のVisualforceページだけを指定することで、目的のタブ(VF)に対して拡張機能を提供できる。
+			// iframeタグが挿入される毎に js が走りなおすので、Salesforce直下(?)のコンテンツのように
+			// MutationObserverでの要素変化によるページ遷移検知（SPA対策）をしなくてよい。
+			all_frames: true,
+			matches: [
+				'https://*.vf.force.com/apex/AtkEmpJobView?*', // 工数実績タブ
+				'https://*.vf.force.com/apex/AtkWorkTimeView?*', // 勤務表タブ
+				// 'https://*.vf.force.com/*', // 検証用(全てのVisualforceページ)
+			],
+			js: ['./src/content.ts'],
+		},
+	],
 }));
 
 // https://vitejs.dev/config/
