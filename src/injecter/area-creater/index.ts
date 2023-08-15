@@ -31,7 +31,24 @@ export class AreaCreatorWD extends Injecter {
 		if (centerWrapper == null || centerTd == null || tr == null) {
 			throw new Error('Failed to find ancestor element for $("#empWorkOk")');
 		}
-		centerTd.style.width = `${centerWrapper.getBoundingClientRect().width}px`; // 疑似fit-content
+		// centerTd.style.width = `${centerWrapper.getBoundingClientRect().width}px`;
+		// ↑最初に日次確定済みのダイアログを開くと、centerWrapperのwidthが0で取れてしまい、
+		//   tdへの転記が0pxで行われるため、以降うまく表示されない。
+		// ↓ResizeObserverでcenterWrapperのwidthを監視するようにした。
+		//   ただし、centerWrapperのwidthが0になったときは転記してはならない。
+		//   cetnerWrapperが上手く広がらず、結果としてまた変な表示になってしまうため。
+		new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				if (entry.target !== centerWrapper) continue;
+				const width = centerWrapper.getBoundingClientRect().width;
+				// 疑似fit-content
+				if (0 < width) {
+					centerTd.style.width = `${centerWrapper.getBoundingClientRect().width}px`;
+				} else {
+					centerTd.style.width = '';
+				}
+			}
+		}).observe(centerWrapper);
 		// 他の<td/>に関しては、widthを消す
 		for (const td of tr.querySelectorAll<HTMLTableCellElement>(':scope > td')) {
 			if (td === centerTd) continue;
