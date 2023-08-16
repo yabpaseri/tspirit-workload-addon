@@ -88,11 +88,9 @@ export class AssignedJobSorter extends Injecter {
 				const amatch = [...akey.matchAll(regex)].at(option.regexp.matchIndex)?.at(option.regexp.captureIndex);
 				const bmatch = [...bkey.matchAll(regex)].at(option.regexp.matchIndex)?.at(option.regexp.captureIndex);
 				if (amatch != null && bmatch != null) {
-					console.log(`${amatch} vs ${bmatch}`);
 					return utils.compare(amatch, bmatch) * order;
 				}
 			}
-			console.log(`${akey} vs ${bkey}`);
 			return utils.compare(akey, bkey) * order;
 		});
 	}
