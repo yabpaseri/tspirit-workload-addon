@@ -15,5 +15,8 @@ export namespace WhenCondition {
 		// 始まらない・終わらない
 		'NOT_STARTS',
 		'NOT_ENDS',
+		// 正規表現に一致する・一致しない
+		'REGEXP_MATCH',
+		'REGEXP_NOT_MATCH',
 	]);
 }

@@ -114,6 +114,10 @@ export class AssignedJobSorter extends Injecter {
 				return !target.startsWith(actual);
 			case 'NOT_ENDS':
 				return !target.endsWith(actual);
+			case 'REGEXP_MATCH':
+				return new RegExp(actual).test(target);
+			case 'REGEXP_NOT_MATCH':
+				return !new RegExp(actual).test(target);
 		}
 	}
 }
