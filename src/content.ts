@@ -2,7 +2,7 @@ import { InjectManager } from './inject-manager';
 import { Preference } from './preference';
 
 declare const window: Window['window'] & {
-	preference: Preference;
+	preference: typeof Preference;
 };
 
 (function main() {
