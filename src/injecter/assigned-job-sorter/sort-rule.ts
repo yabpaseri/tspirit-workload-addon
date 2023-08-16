@@ -4,6 +4,7 @@ import { ExceptionalSortOption, MoveTo, SortOption, WhenCondition, WhenTarget } 
 export type SortRule = z.infer<typeof SortRule.zod>;
 export namespace SortRule {
 	export const zod = z.object({
+		version: z.literal(1),
 		basic: SortOption.zod,
 		exceptional: z
 			.object({
@@ -18,7 +19,10 @@ export namespace SortRule {
 			.array(),
 	});
 
+	export const parse = zod.parse.bind(zod);
+
 	export const defaults = (): SortRule => ({
+		version: 1,
 		basic: {
 			type: 'CUSTOM',
 			key: 'JOB_CODE',
@@ -26,19 +30,9 @@ export namespace SortRule {
 		},
 		exceptional: [
 			{
-				when: { target: 'JOB_NAME', condition: 'INCLUDE', value: '通常サポート' },
-				sort: { type: 'CUSTOM', key: 'JOB_NAME', order: 'DESC' },
-				moveto: 'TOP',
-			},
-			{
-				when: { target: 'JOB_NAME', condition: 'STARTS', value: 'その他業務_' },
+				when: { target: 'JOB_NAME', condition: 'ENDS', value: '(終了)' },
 				sort: { type: 'KEEP' },
-				moveto: 'TOP',
-			},
-			{
-				when: { target: 'JOB_NAME', condition: 'STARTS', value: '[製品開発]' },
-				sort: { type: 'BASIC' },
-				moveto: 'TOP',
+				moveto: 'BOTTOM',
 			},
 		],
 	});

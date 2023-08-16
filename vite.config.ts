@@ -34,6 +34,7 @@ const manifest = defineManifest(({ mode }) => ({
 			js: ['./src/content.ts'],
 		},
 	],
+	permissions: ['storage'],
 }));
 
 // https://vitejs.dev/config/

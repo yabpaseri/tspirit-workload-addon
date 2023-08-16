@@ -1,3 +1,4 @@
+import { Preference } from '../../preference';
 import { UIs, utils } from '../../util';
 import { Injecter } from '../injecter';
 import { SortRule } from './sort-rule';
@@ -33,14 +34,14 @@ export class AssignedJobSorter extends Injecter {
 		for (const e of this.mounted) e.remove();
 	}
 
-	private handleClick() {
+	private async handleClick() {
 		const tbody = this.find<HTMLTableSectionElement>('#empJobRightTable > tbody');
 		const rows = tbody?.querySelectorAll<HTMLTableRowElement>(':scope > tr');
 		if (tbody == null || rows == null) throw new Error('Not found rows');
 		if (rows.length === 0) return;
 		const rowInfos = Array.from(rows).map(RowInfo.convert);
 		// TODO: 設定からの読込。読み込めなかった場合は、何もしない or basic:KEEPだけのrule適用(=何もしない)
-		const rule: SortRule = SortRule.defaults();
+		const rule: SortRule = await Preference.getAssignedJobSortRule();
 		if (rule.exceptional.length === 0) {
 			this.applyBasicSort(rule.basic, rowInfos);
 		} else {
@@ -80,8 +81,18 @@ export class AssignedJobSorter extends Injecter {
 		if (option.type === 'KEEP') return;
 		const key = option.key;
 		const order = option.order === 'ASC' ? 1 : -1;
+		const regex = option.regexp == null ? void 0 : new RegExp(option.regexp.pattern, 'g');
 		rowInfos.sort((a, b) => {
 			const [akey, bkey] = key === 'JOB_CODE' ? [a.jobCode, b.jobCode] : [a.jobName, b.jobName];
+			if (option.regexp != null && regex) {
+				const amatch = [...akey.matchAll(regex)].at(option.regexp.matchIndex)?.at(option.regexp.captureIndex);
+				const bmatch = [...bkey.matchAll(regex)].at(option.regexp.matchIndex)?.at(option.regexp.captureIndex);
+				if (amatch != null && bmatch != null) {
+					console.log(`${amatch} vs ${bmatch}`);
+					return utils.compare(amatch, bmatch) * order;
+				}
+			}
+			console.log(`${akey} vs ${bkey}`);
 			return utils.compare(akey, bkey) * order;
 		});
 	}

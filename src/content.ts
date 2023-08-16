@@ -1,6 +1,12 @@
 import { InjectManager } from './inject-manager';
+import { Preference } from './preference';
+
+declare const window: Window['window'] & {
+	preference: Preference;
+};
 
 (function main() {
+	window.preference = Preference;
 	const manager = new InjectManager();
 	function mutationCallback(mutations: MutationRecord[], observer: MutationObserver) {
 		// 追加された要素の中から「empWorkDialog」または「empJobAssign」のIDを持つ要素を探す
