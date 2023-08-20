@@ -2,6 +2,7 @@ import { Preference } from '~/preference';
 import { UIs, utils } from '~/util';
 import { AddonInfos, JobAssignAddon } from '../addon-base';
 import { ConditionalSortOption, SortOption, When } from './types';
+import { Index } from './options';
 
 /**
  * 「ソート」機能
@@ -11,6 +12,7 @@ export default class AssignedJobSorter extends JobAssignAddon {
 		return {
 			name: 'ジョブソート',
 			active: true,
+			options: Index,
 		};
 	}
 	inject(empJobAssign: HTMLElement): void {

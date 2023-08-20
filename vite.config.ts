@@ -19,6 +19,7 @@ const manifest = defineManifest(({ mode }) => ({
 		'48': 'icons/icon48.png',
 		'128': 'icons/icon128.png',
 	},
+	options_page: 'pages/options.html',
 	content_scripts: [
 		{
 			// 勤務表と工数実績のページに対して、拡張機能によるDOM操作を実行する
