@@ -30,6 +30,6 @@ MemoizedTab.displayName = 'MemoizedTab';
 const S = {
 	Tabs: styled(Tabs)(({ theme }) => ({
 		border: `1px solid ${theme.palette.divider}`,
-		maxWidth: '130px',
+		maxWidth: '180px',
 	})),
 };

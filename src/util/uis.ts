@@ -41,6 +41,11 @@ class UIBuilder<K extends keyof HTMLElementTagNameMap> {
 		this.#e.classList.add(...classes);
 		return this;
 	};
+	public readonly title = (title: string) => {
+		if (this.#skip) return this;
+		this.#e.title = title;
+		return this;
+	};
 	public readonly text = (content: string) => {
 		if (this.#skip) return this;
 		this.#e.textContent = content;
