@@ -8,11 +8,13 @@ import { Index } from './options';
  * 「ソート」機能
  */
 export default class AssignedJobSorter extends JobAssignAddon {
-	infos(): AddonInfos {
+	get infos(): AddonInfos {
 		return {
 			name: 'ジョブソート',
-			active: true,
-			options: Index,
+			options: {
+				priority: 1,
+				component: Index,
+			},
 		};
 	}
 	inject(empJobAssign: HTMLElement): void {

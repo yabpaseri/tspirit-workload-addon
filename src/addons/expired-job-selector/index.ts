@@ -5,11 +5,8 @@ import { AddonInfos, JobAssignAddon } from '../addon-base';
  * 「終了を全選択」機能
  */
 export default class ExpiredJobSelector extends JobAssignAddon {
-	infos(): AddonInfos {
-		return {
-			name: 'expired job selector',
-			active: true,
-		};
+	get infos(): AddonInfos {
+		return { name: 'expired job selector' };
 	}
 	inject(empJobAssign: HTMLElement): void {
 		// tr(parent) > td > button#empJobDel

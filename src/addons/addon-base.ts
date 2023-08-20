@@ -4,7 +4,7 @@ export abstract class Addon {
 	/**
 	 * アドオンの情報を返す
 	 */
-	abstract infos(): AddonInfos;
+	abstract get infos(): AddonInfos;
 
 	/**
 	 * TeamSpiritに要素を注入する
@@ -25,8 +25,15 @@ export abstract class JobAssignAddon extends Addon {
 export type AddonInfos = {
 	/** アドオン名 */
 	name: string;
-	/** 有効フラグ */
-	active: boolean;
 	/** 設定ページ用コンポーネント */
-	options?: Parameters<typeof createElement>[0];
+	options?: {
+		priority: number;
+		component: OptionsComponent;
+	};
 };
+
+/**
+ * オプション画面で使用するコンポーネント  \
+ * createElement可能な型
+ */
+export type OptionsComponent = Parameters<typeof createElement>[0];
