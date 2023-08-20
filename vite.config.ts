@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
 import { author, description, version as version_name } from './package.json';
 import archive from './plugins/vite-plugin-archive';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 const version = version_name.replace(/[^\d.-]+/g, '').replace('-', '.');
 const manifest = defineManifest(({ mode }) => ({
@@ -39,7 +40,7 @@ const manifest = defineManifest(({ mode }) => ({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), crx({ manifest }), archive()],
+	plugins: [react(), tsconfigPaths(), crx({ manifest }), archive()],
 	build: {
 		minify: false, // chromeの審査に通りやすく
 		rollupOptions: {

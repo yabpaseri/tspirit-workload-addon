@@ -1,4 +1,5 @@
-import { AreaCreatorWD, AssignedJobSorter, ExpiredJobSelector } from './injecter';
+import { ALL_ADDONS } from './addons';
+import { Addon, JobAssignAddon, WorkBalanceAddon } from './addons/addon-base';
 
 export class InjectManager {
 	/** 工数実績入力ダイアログ */
@@ -14,12 +15,16 @@ export class InjectManager {
 	setEmpWorkDialog(empWorkDialog: HTMLElement) {
 		if (this.#empWorkDialog != null) throw new Error('empWorkDialog is already set');
 		this.#empWorkDialog = empWorkDialog;
-		new AreaCreatorWD(this.#empWorkDialog).mount();
+		this.#inject(WorkBalanceAddon, empWorkDialog);
 	}
 	setEmpJobAssign(empJobAssign: HTMLElement) {
 		if (this.#empJobAssign != null) throw new Error('empJobAssign is already set');
 		this.#empJobAssign = empJobAssign;
-		new AssignedJobSorter(this.#empJobAssign).mount();
-		new ExpiredJobSelector(this.#empJobAssign).mount();
+		this.#inject(JobAssignAddon, empJobAssign);
+	}
+	#inject(c: typeof Addon, ele: HTMLElement) {
+		for (const addon of ALL_ADDONS) {
+			if (addon instanceof c) addon.inject(ele);
+		}
 	}
 }
