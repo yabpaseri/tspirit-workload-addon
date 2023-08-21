@@ -56,6 +56,11 @@ class UIBuilder<K extends keyof HTMLElementTagNameMap> {
 		fy(this.#e.style);
 		return this;
 	};
+	public readonly src = (src: string) => {
+		if (this.#skip || !('src' in this.#e)) return this;
+		this.#e.src = src;
+		return this;
+	};
 
 	public readonly append = (...nodes: (string | Node)[]) => {
 		if (this.#skip) return this;
@@ -76,6 +81,12 @@ class UIBuilder<K extends keyof HTMLElementTagNameMap> {
 	public readonly prependTo = (parent: HTMLElement) => {
 		if (this.#skip) return this;
 		parent.prepend(this.#e);
+		return this;
+	};
+
+	public readonly remove = () => {
+		if (this.#skip) return this;
+		this.#e.remove();
 		return this;
 	};
 

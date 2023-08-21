@@ -1,9 +1,9 @@
 import { crx, defineManifest } from '@crxjs/vite-plugin';
 import react from '@vitejs/plugin-react-swc';
 import { defineConfig } from 'vite';
+import tsconfigPaths from 'vite-tsconfig-paths';
 import { author, description, version as version_name } from './package.json';
 import archive from './plugins/vite-plugin-archive';
-import tsconfigPaths from 'vite-tsconfig-paths';
 
 const version = version_name.replace(/[^\d.-]+/g, '').replace('-', '.');
 const manifest = defineManifest(({ mode }) => ({
@@ -36,6 +36,12 @@ const manifest = defineManifest(({ mode }) => ({
 			js: ['./src/content.ts'],
 		},
 	],
+	web_accessible_resources: [
+		{
+			matches: ['https://*.vf.force.com/*'],
+			resources: ['pages/workload-import.html'],
+		},
+	],
 	permissions: ['storage'],
 }));
 
@@ -51,6 +57,7 @@ export default defineConfig({
 				chunkFileNames: `assets/[name].js`,
 				assetFileNames: `assets/[name].[ext]`,
 			},
+			input: ['pages/workload-import.html'],
 		},
 	},
 });
