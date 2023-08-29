@@ -2,7 +2,6 @@ import { UIs } from '~/util';
 import { AddonInfos, WorkBalanceAddon } from '../addon-base';
 import AreaCreator from '../area-creator';
 import { C2PMessage, P2CMessage } from './iframe/message';
-import { Index } from './options';
 
 /**
  * 「インポート」機能
@@ -10,10 +9,11 @@ import { Index } from './options';
 export default class WorkloadImporter extends WorkBalanceAddon {
 	get infos(): AddonInfos {
 		return {
+			enabled: false,
 			name: '工数インポート',
 			options: {
 				priority: 0,
-				component: Index,
+				component: () => import('./options').then((v) => v.Index),
 			},
 		};
 	}

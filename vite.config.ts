@@ -29,8 +29,8 @@ const manifest = defineManifest(({ mode }) => ({
 			// MutationObserverでの要素変化によるページ遷移検知（SPA対策）をしなくてよい。
 			all_frames: true,
 			matches: [
-				'https://*.vf.force.com/apex/AtkEmpJobView?*', // 工数実績タブ
-				'https://*.vf.force.com/apex/AtkWorkTimeView?*', // 勤務表タブ
+				'https://*.vf.force.com/apex/AtkEmpJobView*', // 工数実績タブ
+				'https://*.vf.force.com/apex/AtkWorkTimeView*', // 勤務表タブ
 				// 'https://*.vf.force.com/*', // 検証用(全てのVisualforceページ)
 			],
 			js: ['./src/content.ts'],

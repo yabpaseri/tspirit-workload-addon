@@ -6,7 +6,7 @@ import { AddonInfos, JobAssignAddon } from '../addon-base';
  */
 export default class ExpiredJobSelector extends JobAssignAddon {
 	get infos(): AddonInfos {
-		return { name: 'expired job selector' };
+		return { enabled: true, name: 'expired job selector' };
 	}
 	inject(empJobAssign: HTMLElement): void {
 		// tr(parent) > td > button#empJobDel

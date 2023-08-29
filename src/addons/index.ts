@@ -11,4 +11,4 @@ export const ALL_ADDONS: Readonly<Addon[]> = [
 	// JobAssignAddon
 	new AssignedJobSorter(),
 	new ExpiredJobSelector(),
-];
+].filter((addon) => addon.infos.enabled);

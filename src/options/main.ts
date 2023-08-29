@@ -5,15 +5,16 @@ import { OptionsComponent } from '~/addons/addon-base';
 import { UIs, utils } from '~/util';
 import { OptionRoot } from './option-root';
 
-(function main() {
+(async function main() {
 	const components = new Map<string, OptionsComponent>();
-	const options = ALL_ADDONS.filter((addon) => addon.infos.options != null)
-		.sort((a, b) => utils.compare(a.infos.options!.priority, b.infos.options!.priority) * -1)
-		.map((addon) => {
-			components.set(addon.infos.name, addon.infos.options!.component);
-			return addon.infos.name;
-		});
-
+	const presort_options: { name: string; priority: number }[] = [];
+	for (const addon of ALL_ADDONS) {
+		const { name, options } = addon.infos;
+		if (options == null) continue;
+		components.set(name, await options.component());
+		presort_options.push({ name, priority: options.priority });
+	}
+	const options = presort_options.sort((a, b) => utils.compare(a.priority, b.priority) * -1).map((v) => v.name);
 	const container = UIs.create('div').appendTo(document.body).done();
 	const root = createRoot(container);
 	root.render(createElement(OptionRoot, { options, components }));

@@ -10,7 +10,7 @@ export default class AreaCreator extends WorkBalanceAddon {
 	static WORK_DIALOG_FOOTER_RIGHT_ID = 'tsw__work_dialog_footer_right' as const;
 
 	get infos(): AddonInfos {
-		return { name: 'area creator' };
+		return { enabled: true, name: 'area creator' };
 	}
 	inject(empWorkDialog: HTMLElement): void {
 		const empWorkOk = empWorkDialog.querySelector<HTMLElement>('#empWorkOk');

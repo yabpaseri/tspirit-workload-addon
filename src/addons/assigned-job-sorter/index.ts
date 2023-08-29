@@ -2,7 +2,6 @@ import { Preference } from '~/preference';
 import { UIs, utils } from '~/util';
 import { AddonInfos, JobAssignAddon } from '../addon-base';
 import { ConditionalSortOption, SortOption, When } from './types';
-import { Index } from './options';
 
 /**
  * 「ソート」機能
@@ -10,10 +9,11 @@ import { Index } from './options';
 export default class AssignedJobSorter extends JobAssignAddon {
 	get infos(): AddonInfos {
 		return {
+			enabled: true,
 			name: 'ジョブソート',
 			options: {
 				priority: 1,
-				component: Index,
+				component: () => import('./options').then((v) => v.Index),
 			},
 		};
 	}

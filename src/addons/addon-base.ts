@@ -23,12 +23,14 @@ export abstract class JobAssignAddon extends Addon {
 }
 
 export type AddonInfos = {
+	/** 有効/無効 */
+	enabled: boolean;
 	/** アドオン名 */
 	name: string;
 	/** 設定ページ用コンポーネント */
 	options?: {
 		priority: number;
-		component: OptionsComponent;
+		component: () => Promise<OptionsComponent>;
 	};
 };
 
