@@ -11,10 +11,10 @@ export default class AssignedJobSorter extends JobAssignAddon {
 		return {
 			enabled: true,
 			name: 'ジョブソート',
-			options: {
-				priority: 1,
-				component: () => import('./options').then((v) => v.Index),
-			},
+			// options: {
+			// 	priority: 1,
+			// 	component: () => import('./options').then((v) => v.Index),
+			// },
 		};
 	}
 	inject(empJobAssign: HTMLElement): void {

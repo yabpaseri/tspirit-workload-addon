@@ -19,7 +19,7 @@ const manifest = defineManifest(({ mode }) => ({
 		'48': 'icons/icon48.png',
 		'128': 'icons/icon128.png',
 	},
-	options_page: 'pages/options.html',
+	// options_page: 'pages/options.html',
 	content_scripts: [
 		{
 			// 勤務表と工数実績のページに対して、拡張機能によるDOM操作を実行する
@@ -34,12 +34,6 @@ const manifest = defineManifest(({ mode }) => ({
 				// 'https://*.vf.force.com/*', // 検証用(全てのVisualforceページ)
 			],
 			js: ['./src/content.ts'],
-		},
-	],
-	web_accessible_resources: [
-		{
-			matches: ['https://*.vf.force.com/*'],
-			resources: ['pages/workload-import.html'],
 		},
 	],
 	permissions: ['storage'],
@@ -57,7 +51,6 @@ export default defineConfig({
 				chunkFileNames: `assets/[name].js`,
 				assetFileNames: `assets/[name].[ext]`,
 			},
-			input: ['pages/workload-import.html'],
 		},
 	},
 });
