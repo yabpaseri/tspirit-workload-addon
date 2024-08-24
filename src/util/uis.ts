@@ -12,6 +12,12 @@ export const find = document.querySelector.bind(document);
 /** document.querySelectorAllのシンタックスシュガー */
 export const finds = document.querySelectorAll.bind(document);
 
+/** document.evaluate を扱いやすくラップしたもの */
+export const evaluate = (xpath: string, node: Node = document): Node[] => {
+	const res = document.evaluate(xpath, node, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+	return [...Array(res.snapshotLength)].map((_, i) => res.snapshotItem(i)) as Node[];
+};
+
 class UIBuilder<K extends keyof HTMLElementTagNameMap> {
 	#e: HTMLElementTagNameMap[K];
 	#skip: boolean;
