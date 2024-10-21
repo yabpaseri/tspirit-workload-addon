@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "tspirit-workload-addon",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "SalesforceにインストールされたTeamSpiritが提供するページを拡張します。",
   "license": "MIT",
   "author": "yabpaseri",
@@ -13,35 +13,38 @@
     "verup": "npm --no-git-tag-version version"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.14.3",
-    "@mui/material": "^5.14.4",
-    "csv-parse": "^5.5.2",
-    "csv-stringify": "^6.4.4",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.20",
+    "csv-parse": "^5.5.6",
+    "csv-stringify": "^6.4.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "zod": "^3.22.0"
+    "zod": "^3.22.5"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^2.0.0-beta.18",
-    "@types/archiver": "^5.3.2",
-    "@types/chrome": "^0.0.243",
+    "@crxjs/vite-plugin": "^2.0.0-beta.26",
+    "@types/archiver": "^5.3.4",
+    "@types/chrome": "^0.0.278",
     "@types/node": "^20.4.10",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "@typescript-eslint/eslint-plugin": "^6.3.0",
     "@typescript-eslint/parser": "^6.3.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
-    "archiver": "^5.3.1",
+    "archiver": "^5.3.2",
     "eslint": "^8.47.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-react": "^7.33.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.3",
-    "prettier": "^3.0.1",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5",
-    "vite-tsconfig-paths": "^4.2.0"
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.13",
+    "prettier": "^3.0.3",
+    "typescript": "^5.0.4",
+    "vite": "^4.4.12",
+    "vite-tsconfig-paths": "^4.2.3"
+  },
+  "volta": {
+    "node": "20.15.0"
   }
 }
